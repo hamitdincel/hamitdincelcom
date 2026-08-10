@@ -21,9 +21,9 @@ export function TechStack({ asPage = false }: { asPage?: boolean }) {
         {asPage ? (
           <nav
             aria-label="Konum"
-            className="mb-8 flex items-center gap-2 text-[13px] text-contrast-muted"
+            className="mb-6 flex min-h-11 items-center gap-2 text-[13px] text-contrast-muted"
           >
-            <Link href="/" className="transition-colors hover:text-contrast-ink">
+            <Link href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-contrast-ink">
               Ana sayfa
             </Link>
             <span aria-hidden>/</span>

@@ -42,11 +42,11 @@ export function SectionHeading({
       {asPage ? (
         <nav
           aria-label="Konum"
-          className="mb-8 flex items-center gap-2 text-[13px] text-ink-faint"
+          className="mb-6 flex min-h-11 items-center gap-2 text-[13px] text-ink-faint"
         >
           <Link
             href="/"
-            className="transition-colors hover:text-ink focus-visible:text-ink"
+            className="inline-flex min-h-11 items-center transition-colors hover:text-ink focus-visible:text-ink"
           >
             Ana sayfa
           </Link>

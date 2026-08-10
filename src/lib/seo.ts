@@ -73,6 +73,7 @@ export const personJsonLd = {
   name: site.name,
   url: site.url,
   email: site.email,
+  telephone: site.phone.tel,
   jobTitle: site.role,
   alumniOf: {
     "@type": "CollegeOrUniversity",

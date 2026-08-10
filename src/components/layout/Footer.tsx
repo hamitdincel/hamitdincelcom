@@ -1,7 +1,14 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 
-import { footerNavItems, mailtoHref, site } from "@/lib/site";
+import {
+  footerNavItems,
+  mailtoHref,
+  site,
+  telHref,
+  whatsappHref,
+} from "@/lib/site";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { BrandMark } from "@/components/ui/BrandMark";
 
 export function Footer() {
@@ -19,7 +26,7 @@ export function Footer() {
                   {site.name}
                 </span>
                 {/* İngilizce metin — bkz. Header'daki not */}
-                <span className="block font-mono text-[10.5px] tracking-[0.1em] text-ink-faint">
+                <span className="block font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.1em] text-ink-faint">
                   MOBILE APPLICATION DEVELOPER
                 </span>
               </span>
@@ -30,26 +37,50 @@ export function Footer() {
               yayını dahil uçtan uca teslim.
             </p>
 
-            <a
-              href={mailtoHref}
-              className="group mt-6 inline-flex items-center gap-2 text-[14.2px] font-medium transition-colors hover:text-accent"
-            >
-              <Mail className="size-4 text-ink-muted transition-colors group-hover:text-accent" />
-              {site.email}
-            </a>
+            <ul className="mt-5 grid gap-0.5">
+              <li>
+                <a
+                  href={mailtoHref}
+                  className="group inline-flex min-h-11 items-center gap-2.5 text-[14.2px] font-medium transition-colors hover:text-accent"
+                >
+                  <Mail className="size-4 text-ink-muted transition-colors group-hover:text-accent" />
+                  {site.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={telHref}
+                  className="group inline-flex min-h-11 items-center gap-2.5 text-[14.2px] font-medium transition-colors hover:text-accent"
+                >
+                  <Phone className="size-4 text-ink-muted transition-colors group-hover:text-accent" />
+                  {site.phone.display}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex min-h-11 items-center gap-2.5 text-[14.2px] font-medium transition-colors hover:text-[#25D366]"
+                >
+                  <WhatsAppIcon className="size-4 text-ink-muted transition-colors group-hover:text-[#25D366]" />
+                  WhatsApp
+                </a>
+              </li>
+            </ul>
           </div>
 
           {/* ------------------------------------------------ Gezinme */}
           <nav aria-label="Alt menü">
-            <h2 className="font-mono text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
+            <h2 className="font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
               Gezinme
             </h2>
-            <ul className="mt-5 grid gap-3">
+            <ul className="mt-4 grid gap-0.5">
               {footerNavItems.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="group inline-flex items-center gap-1.5 text-[14.2px] text-ink-muted transition-colors hover:text-ink"
+                    className="group inline-flex min-h-11 items-center gap-1.5 text-[14.2px] text-ink-muted transition-colors hover:text-ink"
                   >
                     {item.label}
                     <ArrowUpRight className="size-3 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
@@ -61,14 +92,14 @@ export function Footer() {
 
           {/* -------------------------------------------- Yayındaki işler */}
           <div>
-            <h2 className="font-mono text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
+            <h2 className="font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
               Mağazalarda
             </h2>
-            <ul className="mt-5 grid gap-3">
+            <ul className="mt-4 grid gap-0.5">
               <li>
                 <Link
                   href="/referanslar/medya-tilkisi"
-                  className="text-[14.2px] text-ink-muted transition-colors hover:text-ink"
+                  className="inline-flex min-h-11 items-center text-[14.2px] text-ink-muted transition-colors hover:text-ink"
                 >
                   Medya Tilkisi
                 </Link>
@@ -76,14 +107,14 @@ export function Footer() {
               <li>
                 <Link
                   href="/referanslar/akca-koca-kultur-platformu"
-                  className="text-[14.2px] text-ink-muted transition-colors hover:text-ink"
+                  className="inline-flex min-h-11 items-center text-[14.2px] text-ink-muted transition-colors hover:text-ink"
                 >
                   Akça Koca Kültür Platformu
                 </Link>
               </li>
             </ul>
 
-            <p className="mt-6 font-mono text-[10.5px] leading-[1.7] tracking-[0.06em] text-ink-faint uppercase">
+            <p className="mt-6 font-mono text-[11.5px] sm:text-[10.5px] leading-[1.7] tracking-[0.06em] text-ink-faint uppercase">
               App Store
               <br />
               Google Play

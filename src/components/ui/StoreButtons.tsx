@@ -23,7 +23,7 @@ const shells: Record<Variant, string> = {
   default:
     "inline-flex min-h-11 items-center gap-3 rounded-xl border border-line-strong bg-surface py-2.5 pr-5 pl-4 transition duration-300 hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-canvas hover:shadow-md",
   compact:
-    "inline-flex min-h-9 items-center gap-2 text-[13.5px] font-medium text-ink-muted transition-colors duration-300 hover:text-ink",
+    "inline-flex min-h-11 items-center gap-2 text-[13.5px] font-medium text-ink-muted transition-colors duration-300 hover:text-ink",
   contrast:
     "inline-flex min-h-11 items-center gap-3 rounded-xl border border-contrast-line bg-contrast-surface py-2.5 pr-5 pl-4 text-contrast-ink transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-[#0b0d12]",
 };
@@ -68,7 +68,7 @@ export function StoreButtons({
             <span aria-hidden>{label}</span>
           ) : (
             <span aria-hidden className="flex flex-col text-left leading-[1.2]">
-              <small className="text-[10px] font-medium tracking-[0.1em] uppercase opacity-60">
+              <small className="text-[11px] font-medium tracking-[0.08em] uppercase opacity-60">
                 İndir
               </small>
               <span className="text-[14.5px] font-semibold">{label}</span>

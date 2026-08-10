@@ -31,7 +31,7 @@ export function PhoneCluster({
       {/* Ambient ışıma — telefonların arkasında, kenarlarda eriyor */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-1/2 left-1/2 h-[115%] w-[125%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[radial-gradient(closest-side,var(--accent-glow),transparent_70%)] blur-[6px]"
+        className="pointer-events-none absolute top-1/2 left-1/2 h-[112%] w-[118%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[radial-gradient(closest-side,var(--accent-glow),transparent_70%)] blur-[6px]"
       />
 
       {/* Zemine temas gölgesi */}
@@ -46,7 +46,7 @@ export function PhoneCluster({
           alt={`${label} — ${left.title}`}
           variant="small"
           priority={priority}
-          className={`animate-drift-slow z-1 translate-x-[38px] translate-y-3 rotate-[-7deg] sm:translate-x-[52px] sm:translate-y-4 ${
+          className={`animate-drift-slow z-1 -mr-[38px] translate-y-3 rotate-[-7deg] sm:-mr-[52px] sm:translate-y-4 ${
             compactOnMobile ? "max-[420px]:hidden" : ""
           }`}
         />
@@ -61,7 +61,7 @@ export function PhoneCluster({
           alt={`${label} — ${right.title}`}
           variant="small"
           priority={priority}
-          className={`animate-drift-delayed z-2 -translate-x-[38px] translate-y-3 rotate-[7deg] sm:-translate-x-[52px] sm:translate-y-4 ${
+          className={`animate-drift-delayed z-2 -ml-[38px] translate-y-3 rotate-[7deg] sm:-ml-[52px] sm:translate-y-4 ${
             compactOnMobile ? "max-[420px]:hidden" : ""
           }`}
         />

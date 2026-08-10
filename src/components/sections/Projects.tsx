@@ -57,7 +57,7 @@ function ProjectShowcase({
             <dl className="mt-8 grid gap-5 sm:grid-cols-2">
               {[project.challenge, project.approach].map((block) => (
                 <div key={block.title}>
-                  <dt className="font-mono text-[10.5px] tracking-[0.12em] text-ink-faint uppercase">
+                  <dt className="font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.12em] text-ink-faint uppercase">
                     {block.title}
                   </dt>
                   <dd className="mt-2 text-[13.8px] leading-[1.6] text-ink-muted">

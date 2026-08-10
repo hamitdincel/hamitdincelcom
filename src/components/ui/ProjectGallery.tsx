@@ -23,7 +23,7 @@ function Caption({
     <div className={size === "lg" ? "mt-6" : "mt-4"}>
       <h3
         className={`font-mono tracking-[0.1em] text-accent uppercase ${
-          size === "lg" ? "text-[11.5px]" : "text-[10.5px]"
+          size === "lg" ? "text-[11.5px]" : "text-[11.5px] sm:text-[10.5px]"
         }`}
       >
         {String(index + 1).padStart(2, "0")} · {screen.title}

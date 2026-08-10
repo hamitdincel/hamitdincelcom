@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, Clock, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { closingCapabilities } from "@/lib/content";
-import { mailtoHref, site } from "@/lib/site";
+import { mailtoHref, site, telHref, whatsappHref } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -35,9 +36,9 @@ export function Contact({ asPage = false }: { asPage?: boolean }) {
         {asPage ? (
           <nav
             aria-label="Konum"
-            className="mb-8 flex items-center gap-2 text-[13px] text-ink-faint"
+            className="mb-6 flex min-h-11 items-center gap-2 text-[13px] text-ink-faint"
           >
-            <Link href="/" className="transition-colors hover:text-ink">
+            <Link href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
               Ana sayfa
             </Link>
             <span aria-hidden className="text-line-strong">
@@ -82,13 +83,37 @@ export function Contact({ asPage = false }: { asPage?: boolean }) {
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
             <a
-              href={`mailto:${site.email}`}
-              className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-line-strong bg-surface px-7 py-3.5 text-[15px] font-medium transition duration-300 hover:-translate-y-0.5 hover:bg-surface-2"
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center gap-2.5 rounded-xl border border-line-strong bg-surface px-7 py-3.5 text-[15px] font-medium transition duration-300 hover:-translate-y-0.5 hover:border-[#25D366]/40 hover:bg-surface-2"
             >
-              <Mail className="size-4 text-ink-muted" />
-              {site.email}
+              <WhatsAppIcon className="size-[18px] text-[#25D366]" />
+              WhatsApp
             </a>
           </div>
+
+          {/* Doğrudan erişim — e-posta ve telefon */}
+          <ul className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <li>
+              <a
+                href={`mailto:${site.email}`}
+                className="inline-flex min-h-11 items-center gap-2 text-[14.5px] text-ink-muted transition-colors hover:text-ink"
+              >
+                <Mail className="size-4" />
+                {site.email}
+              </a>
+            </li>
+            <li>
+              <a
+                href={telHref}
+                className="inline-flex min-h-11 items-center gap-2 text-[14.5px] text-ink-muted transition-colors hover:text-ink"
+              >
+                <Phone className="size-4" />
+                {site.phone.display}
+              </a>
+            </li>
+          </ul>
 
           {/* Sakin yetkinlik satırı */}
           <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-mono text-[12px] tracking-[0.04em] text-ink-faint">

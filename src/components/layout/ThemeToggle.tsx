@@ -20,7 +20,7 @@ export function ThemeToggle() {
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label="Temayı değiştir"
       title="Temayı değiştir"
-      className="grid size-[38px] shrink-0 place-items-center rounded-[11px] border border-line bg-surface text-ink-muted transition-colors hover:border-line-strong hover:bg-surface-2 hover:text-ink"
+      className="grid size-11 shrink-0 md:size-[38px] place-items-center rounded-[11px] border border-line bg-surface text-ink-muted transition-colors hover:border-line-strong hover:bg-surface-2 hover:text-ink"
     >
       <Sun aria-hidden className="size-[18px] dark:hidden" />
       <Moon aria-hidden className="hidden size-[18px] dark:block" />

@@ -88,15 +88,15 @@ export default async function ProjectDetailPage({
         <Container className="relative py-14 sm:py-20">
           <nav
             aria-label="Konum"
-            className="mb-10 flex items-center gap-2 text-[13px] text-ink-faint"
+            className="mb-8 flex min-h-11 items-center gap-2 text-[13px] text-ink-faint"
           >
-            <Link href="/" className="transition-colors hover:text-ink">
+            <Link href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
               Ana sayfa
             </Link>
             <span aria-hidden className="text-line-strong">
               /
             </span>
-            <Link href="/referanslar" className="transition-colors hover:text-ink">
+            <Link href="/referanslar" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
               Referanslar
             </Link>
             <span aria-hidden className="text-line-strong">
@@ -193,7 +193,7 @@ export default async function ProjectDetailPage({
                     key={item.label}
                     className={`py-5 ${index > 0 ? "border-t border-line" : ""}`}
                   >
-                    <dt className="font-mono text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
+                    <dt className="font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
                       {item.label}
                     </dt>
                     <dd className="mt-2 text-[14.2px] leading-[1.6] text-ink-muted">
@@ -219,7 +219,7 @@ export default async function ProjectDetailPage({
             </Reveal>
 
             <Reveal index={1}>
-              <h3 className="font-mono text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
+              <h3 className="font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
                 Öne çıkanlar
               </h3>
               <ul className="mt-6 grid gap-5">
@@ -282,7 +282,7 @@ export default async function ProjectDetailPage({
           <div aria-hidden className="rule-fade my-16" />
 
           <Reveal className="mb-8">
-            <h2 className="font-mono text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
+            <h2 className="font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
               Teknoloji yığını
             </h2>
           </Reveal>
@@ -343,7 +343,7 @@ export default async function ProjectDetailPage({
               >
                 <ArrowLeft className="size-4 shrink-0 text-ink-faint transition-transform duration-300 group-hover:-translate-x-1" />
                 <span>
-                  <span className="block font-mono text-[10.5px] tracking-[0.12em] text-ink-faint uppercase">
+                  <span className="block font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.12em] text-ink-faint uppercase">
                     Önceki proje
                   </span>
                   <span className="mt-1.5 block text-[15px] font-medium">
@@ -359,7 +359,7 @@ export default async function ProjectDetailPage({
                 className="group flex items-center justify-end gap-4 rounded-2xl border border-line bg-surface p-6 text-right transition duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-md sm:col-start-2"
               >
                 <span>
-                  <span className="block font-mono text-[10.5px] tracking-[0.12em] text-ink-faint uppercase">
+                  <span className="block font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.12em] text-ink-faint uppercase">
                     Sonraki proje
                   </span>
                   <span className="mt-1.5 block text-[15px] font-medium">

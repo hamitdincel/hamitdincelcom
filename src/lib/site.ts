@@ -5,6 +5,18 @@ export const site = {
   initials: "HD",
   role: "Mobil Uygulama Geliştirici",
   email: "hamitdincel@gmail.com",
+
+  /**
+   * Telefon üç farklı biçimde tutuluyor:
+   *   display  — ekranda okunan Türkçe gösterim
+   *   tel      — tel: bağlantısı için uluslararası biçim
+   *   whatsapp — wa.me yalnızca rakam kabul eder, baştaki 0 yerine ülke kodu
+   */
+  phone: {
+    display: "0507 453 14 14",
+    tel: "+905074531414",
+    whatsapp: "905074531414",
+  },
   location: "Türkiye · Uzaktan çalışmaya uygun",
   url: "https://hamitdincel.com",
   description:
@@ -14,6 +26,13 @@ export const site = {
 export const mailtoHref = `mailto:${site.email}?subject=${encodeURIComponent(
   "Proje Talebi",
 )}&body=${encodeURIComponent("Merhaba Hamit,\n\nProjem hakkında kısaca:\n")}`;
+
+export const telHref = `tel:${site.phone.tel}`;
+
+/** Hazır giriş metniyle WhatsApp sohbeti açar. */
+export const whatsappHref = `https://wa.me/${site.phone.whatsapp}?text=${encodeURIComponent(
+  "Merhaba Hamit, hamitdincel.com üzerinden yazıyorum. Bir uygulama projesi hakkında konuşmak istiyorum.",
+)}`;
 
 /** Menüdeki bağlantılar — hepsi gerçek sayfa, kaydırma bağlantısı yok. */
 export const navItems: NavItem[] = [

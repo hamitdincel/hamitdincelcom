@@ -34,7 +34,10 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative ${tones[tone]} ${
+      // overflow-x-clip: dekoratif ışımaların yatay kaydırma yaratmasını
+      // engeller. overflow-hidden yerine clip, çünkü hidden içerideki
+      // `position: sticky` öğeleri (SSS başlığı, künye) çalışmaz hale getirir.
+      className={`relative overflow-x-clip ${tones[tone]} ${
         compact ? "py-16 sm:py-20" : "py-20 sm:py-28 lg:py-36"
       } ${className}`}
     >

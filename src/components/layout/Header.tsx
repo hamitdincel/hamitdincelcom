@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { mailtoHref, navItems, site } from "@/lib/site";
+import { mailtoHref, navItems, site, telHref, whatsappHref } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -15,9 +16,18 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  /* Kaydırıldığında header daralır, blur ve ince kenarlık kazanır */
+  /**
+   * Kaydırınca header'ın yalnızca görünümü değişir: blur, ince kenarlık,
+   * hafif gölge. **Yüksekliği bilinçli olarak sabit.**
+   *
+   * Yükseklik değiştirilirse header sticky olduğu için belge de kısalıyor,
+   * tarayıcı scrollY'yi geri çekiyor ve eşiğin etrafında sonsuz
+   * büyü/küçül titremesi oluşuyordu. Ayrıca her geçişte 16px'lik içerik
+   * sıçraması CLS'e yazılıyordu. Sabit yükseklik ikisini de ortadan
+   * kaldırıyor — buraya yeniden `h-[...]` değişimi eklemeyin.
+   */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -45,7 +55,7 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-100 transition-[height,background-color,border-color,box-shadow] duration-400 ease-[cubic-bezier(0.22,0.61,0.36,1)] ${
+      className={`sticky top-0 z-100 transition-[background-color,border-color,box-shadow] duration-400 ease-[cubic-bezier(0.22,0.61,0.36,1)] ${
         scrolled
           ? "border-b border-line shadow-xs backdrop-blur-xl backdrop-saturate-150"
           : "border-b border-transparent"
@@ -57,15 +67,13 @@ export function Header() {
       }}
     >
       <div
-        className={`mx-auto flex w-full max-w-[1200px] items-center justify-between gap-6 px-5 transition-[height] duration-400 ease-[cubic-bezier(0.22,0.61,0.36,1)] sm:px-8 ${
-          scrolled ? "h-[62px]" : "h-[78px]"
-        }`}
+        className="mx-auto flex h-[70px] w-full max-w-[1200px] items-center justify-between gap-6 px-5 sm:px-8"
       >
         {/* -------------------------------------------------------- Marka */}
         <Link
           href="/"
           onClick={() => setMenuOpen(false)}
-          className="group inline-flex items-center gap-3"
+          className="group -my-2 inline-flex min-h-11 items-center gap-3 py-2"
         >
           <BrandMark
             gradientId="brand-header"
@@ -75,16 +83,16 @@ export function Header() {
           {/* Markayı yazıdan ayıran ince çizgi — logo kilidinin bir parçası */}
           <span
             aria-hidden
-            className="hidden h-7 w-px bg-line-strong min-[420px]:block"
+            className="hidden h-7 w-px bg-line-strong min-[360px]:block"
           />
 
-          <span className="hidden leading-tight min-[420px]:block">
+          <span className="hidden leading-tight min-[360px]:block">
             <span className="block text-[14.5px] font-semibold tracking-[-0.02em]">
               {site.name}
             </span>
             {/* İngilizce metin: CSS uppercase Türkçe kurallarıyla i→İ yapar,
                 bu yüzden metin doğrudan büyük harfle yazılıyor. */}
-            <span className="block font-mono text-[10px] tracking-[0.1em] text-ink-faint">
+            <span className="block font-mono text-[11px] tracking-[0.1em] text-ink-faint">
               MOBILE DEVELOPER
             </span>
           </span>
@@ -121,7 +129,7 @@ export function Header() {
 
           <a
             href={mailtoHref}
-            className="group hidden min-h-9 items-center gap-1.5 rounded-lg border border-line-strong bg-surface px-4 py-2 text-[13.5px] font-medium transition duration-300 hover:-translate-y-px hover:bg-surface-2 hover:shadow-sm md:inline-flex"
+            className="group hidden min-h-9 items-center gap-1.5 rounded-lg border border-line-strong bg-surface px-4 py-2 text-[13.5px] font-medium transition duration-300 hover:-translate-y-px hover:bg-surface-2 hover:shadow-sm lg:inline-flex"
           >
             Projenizi konuşalım
             <ArrowRight className="size-3.5 text-ink-muted transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -145,9 +153,7 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label="Mobil menü"
-          className={`fixed inset-x-0 bottom-0 z-50 flex flex-col overflow-y-auto border-t border-line bg-canvas px-5 pt-6 pb-10 md:hidden ${
-            scrolled ? "top-[62px]" : "top-[78px]"
-          }`}
+          className="fixed inset-x-0 top-[70px] bottom-0 z-50 flex flex-col overflow-y-auto border-t border-line bg-canvas px-5 pt-6 pb-10 md:hidden"
         >
           <ul className="flex flex-col">
             {navItems.map((item, index) => (
@@ -178,10 +184,26 @@ export function Header() {
             <ArrowRight className="size-4" />
           </a>
 
-          {/* E-posta adresi büyütülmemeli */}
-          <p className="mt-6 font-mono text-[12px] tracking-[0.04em] text-ink-faint">
-            {site.email}
-          </p>
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="mt-3 inline-flex min-h-13 items-center justify-center gap-2.5 rounded-xl border border-line-strong bg-surface px-6 py-3.5 text-[15px] font-medium"
+          >
+            <WhatsAppIcon className="size-[18px] text-[#25D366]" />
+            WhatsApp&apos;tan yaz
+          </a>
+
+          {/* E-posta ve telefon büyütülmemeli */}
+          <div className="mt-6 grid gap-1 font-mono text-[12px] tracking-[0.04em] text-ink-faint">
+            <a href={`mailto:${site.email}`} className="inline-flex min-h-9 items-center">
+              {site.email}
+            </a>
+            <a href={telHref} className="inline-flex min-h-9 items-center">
+              {site.phone.display}
+            </a>
+          </div>
         </nav>
       ) : null}
     </header>

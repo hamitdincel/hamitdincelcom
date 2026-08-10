@@ -72,7 +72,7 @@ export function About({ asPage = false }: { asPage?: boolean }) {
                   key={fact.label}
                   className="flex flex-wrap items-baseline gap-x-5 gap-y-1 border-b border-line py-3.5"
                 >
-                  <dt className="w-20 shrink-0 font-mono text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
+                  <dt className="w-20 shrink-0 font-mono text-[11.5px] sm:text-[10.5px] tracking-[0.14em] text-ink-faint uppercase">
                     {fact.label}
                   </dt>
                   <dd className="flex-1 text-[14.2px] leading-[1.5] text-ink-muted">
