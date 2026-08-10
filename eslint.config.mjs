@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // npm run package çıktısı — derlenmiş kod, denetlenmesi anlamsız
+    "deploy/**",
   ]),
 ]);
 

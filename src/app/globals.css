@@ -1,26 +1,351 @@
 @import "tailwindcss";
 
+/* next-themes `class` stratejisiyle çalışan koyu tema varyantı */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   1. JETONLAR — AÇIK TEMA
+   Canvas hafif gri, kartlar beyaz. Bu fark, düz beyaz zeminde
+   kaybolan yüzey hiyerarşisini geri getiriyor.
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --canvas: #f8f9fb;
+  --canvas-raised: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f1f3f8;
+
+  --ink: #0a0a0b;
+  --ink-muted: #606775;
+  --ink-faint: #767d8c;
+
+  --line: #e6e8ee;
+  --line-strong: #d3d7e0;
+
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: rgb(37 99 235 / 0.07);
+  --accent-glow: rgb(37 99 235 / 0.15);
+  --accent-tint: rgb(37 99 235 / 0.035);
+
+  --grid-line: rgb(10 10 11 / 0.045);
+
+  /* Marka monogramı — sol-alttan sağ-üste gradyan */
+  --brand-from: #2f7cf6;
+  --brand-mid: #1b4fd8;
+  --brand-to: #0a0d14;
+
+  /* Cihaz kasası — kenarlarda metalik geçiş, üstte ışık vurgusu */
+  --device-frame: linear-gradient(
+    155deg,
+    #dcdfe6 0%,
+    #f6f8fa 18%,
+    #b7bec9 48%,
+    #eef1f5 74%,
+    #c5ccd6 100%
+  );
+  --device-edge: rgb(10 10 11 / 0.18);
+  --device-inner: rgb(255 255 255 / 0.55);
+  --device-ground: rgb(10 10 11 / 0.16);
+
+  /* Ters (koyu) şerit — her iki temada da aynı karakterde durur */
+  --contrast-bg: #0b0d12;
+  --contrast-ink: #f2f4f9;
+  --contrast-muted: #99a1b3;
+  --contrast-line: rgb(255 255 255 / 0.09);
+  --contrast-surface: rgb(255 255 255 / 0.035);
+  --contrast-accent: #7ea0ff;
+
+  --shadow-xs: 0 1px 2px rgb(10 10 11 / 0.05);
+  --shadow-sm: 0 2px 10px -3px rgb(10 10 11 / 0.08);
+  --shadow-md: 0 12px 32px -14px rgb(10 10 11 / 0.2);
+  --shadow-lg: 0 28px 64px -28px rgb(10 10 11 / 0.28);
+
+  /* Telefon: yumuşak ortam gölgesi + dar temas gölgesi + iç ışık çizgisi */
+  --shadow-device:
+    0 2px 4px rgb(10 10 11 / 0.06),
+    0 12px 24px -10px rgb(10 10 11 / 0.16),
+    0 44px 90px -40px rgb(10 10 11 / 0.4);
+
+  color-scheme: light;
 }
 
+/* ============================================================
+   2. JETONLAR — KOYU TEMA
+   Beyazın tersi değil; ayrı tasarlanmış lacivert-siyah bir palet.
+   ============================================================ */
+.dark {
+  --canvas: #08090d;
+  --canvas-raised: #0c0e14;
+  --surface: #111319;
+  --surface-2: #171a22;
+
+  --ink: #eef1f7;
+  --ink-muted: #9aa3b4;
+  --ink-faint: #798195;
+
+  --line: #1e222c;
+  --line-strong: #2b3140;
+
+  --accent: #6c8fff;
+  --accent-hover: #89a5ff;
+  --accent-soft: rgb(108 143 255 / 0.12);
+  --accent-glow: rgb(108 143 255 / 0.22);
+  --accent-tint: rgb(108 143 255 / 0.045);
+
+  --grid-line: rgb(255 255 255 / 0.032);
+
+  /* Koyu temada marka açık gövdeli, köşesi camgöbeği */
+  --brand-from: #22d3ee;
+  --brand-mid: #93d3fb;
+  --brand-to: #ffffff;
+
+  --device-frame: linear-gradient(
+    155deg,
+    #3b4149 0%,
+    #6b7380 18%,
+    #24282f 48%,
+    #515965 74%,
+    #2e333a 100%
+  );
+  --device-edge: rgb(0 0 0 / 0.65);
+  --device-inner: rgb(255 255 255 / 0.14);
+  --device-ground: rgb(0 0 0 / 0.55);
+
+  --contrast-bg: #12151d;
+  --contrast-ink: #f2f4f9;
+  --contrast-muted: #99a1b3;
+  --contrast-line: rgb(255 255 255 / 0.08);
+  --contrast-surface: rgb(255 255 255 / 0.03);
+  --contrast-accent: #8aa6ff;
+
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-sm: 0 2px 10px -3px rgb(0 0 0 / 0.6);
+  --shadow-md: 0 12px 32px -14px rgb(0 0 0 / 0.75);
+  --shadow-lg: 0 28px 64px -28px rgb(0 0 0 / 0.9);
+
+  --shadow-device:
+    0 2px 4px rgb(0 0 0 / 0.5),
+    0 12px 24px -10px rgb(0 0 0 / 0.7),
+    0 44px 90px -40px rgb(0 0 0 / 0.95);
+
+  color-scheme: dark;
+}
+
+/* ============================================================
+   3. TAILWIND TEMASI
+   bg-canvas · text-ink-muted · border-line · text-accent …
+   ============================================================ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-canvas-raised: var(--canvas-raised);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-contrast-bg: var(--contrast-bg);
+  --color-contrast-ink: var(--contrast-ink);
+  --color-contrast-muted: var(--contrast-muted);
+  --color-contrast-line: var(--contrast-line);
+  --color-contrast-surface: var(--contrast-surface);
+  --color-contrast-accent: var(--contrast-accent);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================================
+   4. TEMEL KATMAN
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 5px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   5. DERİNLİK KATMANLARI
+   Tek başına fark edilmeyen, kaldırıldığında eksikliği hissedilen
+   arka plan katmanları.
+   ============================================================ */
+@layer components {
+  /* İnce teknik ızgara — kenarlara doğru eriyerek biter */
+  .layer-grid {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(
+      ellipse 78% 58% at 50% 18%,
+      #000 20%,
+      transparent 76%
+    );
+  }
+
+  /* Bölüm ayrımlarında kullanılan, ortada güçlenip uçlarda kaybolan çizgi */
+  .rule-fade {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--line-strong) 22%,
+      var(--line-strong) 78%,
+      transparent
+    );
+  }
+
+  /* Çok düşük opaklıklı doku — tek renk yüzeylerdeki bantlaşmayı kırar */
+  .layer-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.022;
+  }
+  .dark .layer-noise {
+    opacity: 0.03;
+  }
+
+  /* ---------------------------------------------------- Cihaz */
+
+  /* Telefon kasası: metalik kenar + iç ışık çizgisi + katmanlı gölge */
+  .device-shell {
+    background: var(--device-frame);
+    box-shadow:
+      0 0 0 1px var(--device-edge),
+      inset 0 1px 0 var(--device-inner),
+      var(--shadow-device);
+  }
+
+  /* Telefonun zemine değdiği hissini veren geniş, çok yumuşak gölge */
+  .device-ground {
+    background: radial-gradient(
+      ellipse 50% 50% at 50% 50%,
+      var(--device-ground),
+      transparent 72%
+    );
+    filter: blur(8px);
+  }
+
+  /* ---------------------------------------------- Yüzey efektleri */
+
+  /* İmleci takip eden çok hafif vurgu */
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-out-soft);
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      var(--accent-soft),
+      transparent 68%
+    );
+  }
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+
+  /* Kartların üst kenarındaki ince ışık çizgisi — kalınlık hissi verir */
+  .edge-highlight {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.7);
+  }
+  .dark .edge-highlight {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+  }
+
+  /* ------------------------------------------------- Tipografi */
+
+  .text-gradient-accent {
+    background: linear-gradient(
+      100deg,
+      var(--accent) 0%,
+      color-mix(in oklab, var(--accent) 78%, var(--ink)) 62%,
+      var(--ink) 118%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-ink {
+    background: linear-gradient(175deg, var(--ink), var(--ink-muted));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+/* ============================================================
+   6. HAREKET
+   Fark edilmeyecek kadar yavaş; reduced-motion'da tamamen durur.
+   ============================================================ */
+@layer utilities {
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -4px, 0);
+    }
+  }
+
+  .animate-drift {
+    animation: drift 7s ease-in-out infinite;
+  }
+  .animate-drift-slow {
+    animation: drift 9s ease-in-out infinite;
+  }
+  .animate-drift-delayed {
+    animation: drift 8s ease-in-out 1.2s infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-drift,
+    .animate-drift-slow,
+    .animate-drift-delayed {
+      animation: none;
+    }
+  }
 }
