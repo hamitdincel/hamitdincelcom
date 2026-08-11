@@ -4,7 +4,7 @@ export const site = {
   name: "Hamit Dincel",
   initials: "HD",
   role: "Mobil Uygulama Geliştirici",
-  email: "hamitdincel@gmail.com",
+  email: "iletisim@hamitdincel.com",
 
   /**
    * Telefon üç farklı biçimde tutuluyor:
