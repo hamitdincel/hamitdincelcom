@@ -10,16 +10,32 @@ const nextConfig: NextConfig = {
    * ve sunucuda `npm install` çalıştırmaya gerek kalmıyor.
    *
    * Dikkat: `.next/static` ve `public/` bu klasöre KOPYALANMAZ; dağıtım
-   * sırasında elle taşınmaları gerekir (bkz. scripts/package-deploy.mjs).
+   * sırasında `postbuild` adımı kopyalıyor (scripts/sync-standalone.mjs).
    */
   output: "standalone",
 
   /**
-   * Sunucuda üretilen görsellerin önbellek süresi (saniye).
-   * Ekran görüntüleri değişmediği için uzun tutmak CPU'yu koruyor.
+   * Görseller çalışma anında optimize EDİLMİYOR.
+   *
+   * Açıkken `next/image`, her görsel için `/_next/image?url=...` adresini
+   * üretiyor. Bu adresin uzantısı olmadığı için sunucudaki nginx onu diskte
+   * bulamıyor ve Node'a proxy'liyor; proxy tarafında ise bir istek hızı
+   * sınırı var. Ana sayfa tek açılışta 141 tane böyle istek yaptığı için
+   * görsellerin büyük kısmı 503 dönüyordu — ziyaretçide "görseller bir
+   * geliyor bir gitmiyor" olarak görünüyordu.
+   *
+   * Kapatınca `next/image` doğrudan `/images/...jpg` adresini yazıyor.
+   * Uzantılı olduğu için nginx bunu diskten servis ediyor: sınıra takılmıyor,
+   * Node'a hiç uğramıyor. Ölçüm: uzantılı istekler 24/24 başarılı,
+   * proxy'ye giden istekler 2/24.
+   *
+   * Bedeli, boyutlandırmanın build öncesinde yapılması gerekmesi.
+   * Kaynak dosyalar `scripts/optimize-images.mjs` ile sitede gösterildikleri
+   * boyuta indirildi (4961 KB → 1793 KB). Yeni görsel eklerken o script
+   * çalıştırılmalı.
    */
   images: {
-    minimumCacheTTL: 60 * 60 * 24 * 30,
+    unoptimized: true,
   },
 
   /** `X-Powered-By: Next.js` başlığını göndermeye gerek yok. */
