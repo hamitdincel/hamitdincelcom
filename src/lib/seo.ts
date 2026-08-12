@@ -134,7 +134,9 @@ export function projectJsonLd(project: Project) {
     description: project.summary,
     author: { "@id": `${site.url}/#person` },
     url: `${site.url}/referanslar/${project.slug}`,
-    sameAs: [project.links.appStore, project.links.googlePlay],
+    ...(project.links
+      ? { sameAs: [project.links.appStore, project.links.googlePlay] }
+      : {}),
   };
 }
 

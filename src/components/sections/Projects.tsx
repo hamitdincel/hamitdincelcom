@@ -77,11 +77,15 @@ function ProjectShowcase({
                 Projeyi incele
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-              <StoreButtons
-                links={project.links}
-                appName={project.name}
-                variant="compact"
-              />
+              {project.links ? (
+                <StoreButtons
+                  links={project.links}
+                  appName={project.name}
+                  variant="compact"
+                />
+              ) : (
+                <span className="text-[13.5px] text-ink-faint">{project.status}</span>
+              )}
             </div>
           </div>
         </Reveal>
@@ -103,8 +107,8 @@ export function Projects({ asPage = false }: { asPage?: boolean }) {
         <SectionHeading
           asPage={asPage}
           kicker="Referanslar"
-          title="Şu anda mağazalarda yayında olan uygulamalar"
-          lead="Aşağıdaki ekran görüntüleri temsilî değil — App Store'daki gerçek uygulama sayfalarından. İkisini de fikir aşamasından yayına kadar ben geliştirdim."
+          title="Uçtan uca geliştirdiğim ürünler"
+          lead="Ekran görüntüleri temsilî değil, uygulamaların kendisinden. Her birini fikir aşamasından çalışır ürüne kadar tek başıma geliştirdim; ikisi mağazalarda yayında."
         />
 
         <div className="space-y-20 sm:space-y-28">

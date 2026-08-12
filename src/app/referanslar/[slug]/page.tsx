@@ -131,11 +131,15 @@ export default async function ProjectDetailPage({
                 {project.tagline}
               </p>
 
-              <StoreButtons
-                links={project.links}
-                appName={project.name}
-                className="mt-9"
-              />
+              {project.links ? (
+                <StoreButtons
+                  links={project.links}
+                  appName={project.name}
+                  className="mt-9"
+                />
+              ) : (
+                <p className="mt-9 text-[14.5px] text-ink-faint">{project.status}</p>
+              )}
             </Reveal>
 
             <Reveal className="flex justify-center">
@@ -322,12 +326,14 @@ export default async function ProjectDetailPage({
               {project.delivery.body}
             </p>
 
-            <StoreButtons
-              links={project.links}
-              appName={project.name}
-              variant="contrast"
-              className="mt-9"
-            />
+            {project.links ? (
+              <StoreButtons
+                links={project.links}
+                appName={project.name}
+                variant="contrast"
+                className="mt-9"
+              />
+            ) : null}
           </Reveal>
         </Container>
       </Section>

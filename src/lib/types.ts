@@ -85,7 +85,10 @@ export type Project = {
   screens: ProjectScreen[];
   tags: string[];
   stack: TechGroup[];
-  links: StoreLinks;
+  /** Yayın durumu — her proje mağazada olmayabilir */
+  status: string;
+  /** Mağaza bağlantıları. Yayınlanmamış projelerde yok. */
+  links?: StoreLinks;
 };
 
 export type ProcessStep = {

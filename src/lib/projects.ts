@@ -129,6 +129,8 @@ export const projects: Project[] = [
       },
     ],
 
+    status: "App Store ve Google Play'de yayında",
+
     tags: [
       "SwiftUI",
       "Kotlin",
@@ -284,6 +286,8 @@ export const projects: Project[] = [
       },
     ],
 
+    status: "App Store ve Google Play'de yayında",
+
     tags: [
       "SwiftUI",
       "Kotlin",
@@ -316,6 +320,165 @@ export const projects: Project[] = [
       googlePlay:
         "https://play.google.com/store/apps/details?id=com.akcakocakultur",
     },
+  },
+
+  {
+    slug: "residio",
+    name: "Residio",
+    tagline:
+      "Rezidans yönetimini tek platforma toplayan sakin, teknisyen ve yönetim uygulaması — aidattan teknik talebe, rezervasyondan ziyaretçi kaydına.",
+    category: "Rezidans Yönetimi",
+    platforms: "iOS + Android + Web paneli",
+    icon: "/images/residio.jpg",
+
+    summary:
+      "Bir rezidansın günlük işleyişi bugün WhatsApp grupları, kâğıt defterler ve telefon aramaları arasında dağılıyor. Residio bunu üç istemcide topluyor: sakin için mobil uygulama, teknisyen için görev akışı, yönetim için web paneli.",
+
+    overview: [
+      "Aidat tahsilatı, teknik arıza takibi, ortak alan rezervasyonu, ziyaretçi kaydı ve duyuru dağıtımı — bunların her biri ayrı bir kanaldan yürüdüğünde kimse bütünü göremiyor. Sakin ödemesinin işlenip işlenmediğini bilmiyor, teknisyen hangi işin öncelikli olduğunu takip edemiyor, yönetim de aylık tabloyu elle çıkarıyor.",
+      "Residio üç rolü tek veri modeli üzerinde birleştiriyor. Sakinin uygulamadan açtığı talep teknisyenin görev listesine düşüyor, tamamlandığında yönetimin raporuna işleniyor; ödeme yapıldığında aidat kaydı ve gecikme zammı hesabı aynı anda kapanıyor.",
+    ],
+
+    challenge: {
+      title: "Zorluk",
+      body: "Üç farklı rol aynı veriyi bambaşka ihtiyaçlarla görüyor: sakin kendi dairesini, teknisyen atandığı görevleri, yönetim binanın tamamını. Yetki sınırlarının veri katmanında kurulması gerekiyordu — arayüzde gizlemek yeterli değil. Denetim turlarından birinde teknisyenin dashboard üzerinden tahsilat grafiğini görebildiği ortaya çıktı ve bu, politika katmanı sıkılaştırılarak kapatıldı.",
+    },
+
+    approach: {
+      title: "Yaklaşım",
+      body: "Yetkilendirme rol tabanlı politikalarla sunucuda kuruldu; her uç nokta kendi politikasından geçiyor. Ödeme, talep ve rezervasyon gibi durum değiştiren işlemler tek bir aksiyon katmanında toplandı, böylece aynı iş kuralı panelde ve mobilde ayrışmıyor. Kritik akışların her biri test altına alındı.",
+    },
+
+    role: {
+      title: "Benim rolüm",
+      body: "Ürünün tamamı: veri modeli ve API tasarımı, Laravel tabanlı backend ve yönetim paneli, Expo ile sakin ve teknisyen mobil uygulamaları. Kapsam dokümanından çalışır sisteme kadar tek elden yürütüldü; dört ayrı denetim turunda bulunan hatalar düzeltilip her biri için tekrar kaçmasını engelleyen test yazıldı.",
+    },
+
+    delivery: {
+      title: "Durum",
+      body: "Geliştirme tamamlandı: 13 panel ekranı, 20 mobil ekran, 40'tan fazla API ucu ve 509 test çalışır durumda. Mağaza yayını için ödeme sağlayıcısı entegrasyonu ve üretim sunucularının kurulumu bekleniyor — bunlar kod tarafında hazır, dış hesap onaylarına bağlı.",
+    },
+
+    features: [
+      {
+        title: "Aidat ve ödeme",
+        detail: "dönemsel faturalama, gecikme zammı, kayıtlı kart ve tahsilat takibi",
+      },
+      {
+        title: "Teknik talep akışı",
+        detail: "kategori, fotoğraf, malzeme ve puanlama ile sakinden teknisyene uçtan uca",
+      },
+      {
+        title: "Rezervasyon ve ziyaretçi",
+        detail: "ortak alan müsaitliği, çakışma kontrolü ve QR ile ziyaretçi girişi",
+      },
+      {
+        title: "Dashboard ve raporlama",
+        detail: "dört rapor, CSV ve PDF dışa aktarma, işlem günlüğü",
+      },
+    ],
+
+    decisions: [
+      {
+        title: "Yetki arayüzde değil veride",
+        body: "Her rol için ayrı politika sınıfı yazıldı ve sorgular bunlardan geçiriliyor. Bir alanı arayüzde gizlemek yetki değildir; denetimde teknisyenin tahsilat verisine erişebildiği tam da bu yüzden ortaya çıktı.",
+      },
+      {
+        title: "Tek aksiyon katmanı",
+        body: "Ödeme kaydetme, talep durumu değiştirme gibi işlemler panel ve mobil için ayrı ayrı yazılmadı. Aynı aksiyon her iki istemciden çağrılıyor, iş kuralı tek yerde duruyor.",
+      },
+      {
+        title: "Tekrarlanan geri düğmesi tek bileşene indi",
+        body: "Geri oku on altı ekranda kopyalanmıştı ve bildirimden derin bağlantıyla açıldığında geçmiş boş olduğu için hiçbir şey yapmıyordu. Tek bileşene indirildi; geçmiş yoksa ana sayfaya düşüyor.",
+      },
+      {
+        title: "Çift tıklama koruması",
+        body: "Satır içi işlem düğmeleri form gönderimlerinden farklı olarak kilitlenmiyordu; ikinci istek sunucudaki iş kuralına takılıp işlem başarılı olmasına rağmen kullanıcıya hata gösteriyordu. Uçuş kilidi eklendi ve tarayıcı testiyle doğrulandı.",
+      },
+    ],
+
+    meta: [
+      { label: "Rol", value: "Ürünün tamamı — backend, panel, mobil" },
+      { label: "İstemciler", value: "Sakin ve teknisyen mobil, yönetim web paneli" },
+      { label: "Kapsam", value: "13 panel ekranı · 20 mobil ekran · 40+ API ucu" },
+      { label: "Durum", value: "Geliştirme tamam, yayın hazırlığı sürüyor" },
+    ],
+
+    screens: [
+      {
+        src: "/images/shots/rs-1.jpg",
+        title: "Sakin ana sayfası",
+        caption:
+          "Ödenmemiş aidat en üstte, tek dokunuşla ödeme. Altında hızlı işlemler, duyurular ve sakinin açtığı taleplerin güncel durumu.",
+      },
+      {
+        src: "/images/shots/rs-2.jpg",
+        title: "Aidatlar",
+        caption:
+          "Ödenecekler, geçmiş ödemeler ve otomatik ödeme ayrı sekmelerde. Kayıtlı kartlar ve fatura kalemleri aynı ekranda; toplam tutar üstte sabit.",
+      },
+      {
+        src: "/images/shots/rs-3.jpg",
+        title: "Teknik talep",
+        caption:
+          "Kategori seçimi, açıklama ve en fazla üç fotoğraf. Konum sakinin dairesinden otomatik geliyor, teknisyen talebi eksiksiz alıyor.",
+      },
+      {
+        src: "/images/shots/rs-4.jpg",
+        title: "Rezervasyon",
+        caption:
+          "Ortak alanlar kapasiteleriyle listeleniyor. Yaklaşan rezervasyonlar onay durumuyla görünüyor; çakışma kontrolü sunucu tarafında.",
+      },
+      {
+        src: "/images/shots/rs-5.jpg",
+        title: "Ziyaretçi kaydı",
+        caption:
+          "Günlük ziyaretçi listesi giriş durumu, plaka ve saatle birlikte. QR ile kayıt ve toplu giriş güvenlik ekranından yönetiliyor.",
+      },
+      {
+        src: "/images/shots/rs-6.jpg",
+        title: "Teknisyen görevleri",
+        caption:
+          "Görevler durum sekmelerine ayrılmış, her kartta öncelik rozeti, daire bilgisi ve fotoğraf. İlerleme çizgisi işin hangi aşamada olduğunu gösteriyor.",
+      },
+    ],
+
+    status: "Geliştirme tamamlandı — yayın hazırlığı sürüyor",
+
+    tags: [
+      "Laravel",
+      "React Native",
+      "Expo",
+      "Inertia",
+      "React",
+      "PostgreSQL",
+    ],
+
+    stack: [
+      {
+        label: "Backend",
+        items: [
+          "PHP 8.3",
+          "Laravel 13",
+          "PostgreSQL",
+          "Redis",
+          "Sanctum",
+          "Spatie Permission",
+        ],
+      },
+      {
+        label: "Panel",
+        items: ["Inertia", "React", "Tailwind CSS", "Vite"],
+      },
+      {
+        label: "Mobil",
+        items: ["React Native", "Expo Router", "TanStack Query", "Reanimated"],
+      },
+      {
+        label: "Servisler",
+        items: ["Expo Push", "Sentry", "Cloudflare R2", "DomPDF"],
+      },
+    ],
   },
 ];
 
