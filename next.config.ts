@@ -2,17 +2,24 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /**
-   * Kendi sunucumuzda çalıştırdığımız için `standalone` çıktısı alıyoruz.
+   * `output: "standalone"` BİLEREK kullanılmıyor.
    *
-   * Next, `.next/standalone` altına yalnızca çalışması için gereken dosyaları
-   * (minimal bir server.js + kullanılan node_modules) kopyalar. Sunucuya
-   * 500 MB'lık `node_modules` yüklemek yerine ~50 MB'lık bir paket taşınıyor
-   * ve sunucuda `npm install` çalıştırmaya gerek kalmıyor.
+   * Standalone çıktısının tek faydası sunucuya `node_modules` taşımamaktır.
+   * Bizim dağıtımımızda sunucuda zaten `npm install` + `next build`
+   * çalışıyor, yani `node_modules` orada olmak zorunda — kazandırdığı bir
+   * şey yok. Karşılığında iki tuzak getiriyordu:
    *
-   * Dikkat: `.next/static` ve `public/` bu klasöre KOPYALANMAZ; dağıtım
-   * sırasında `postbuild` adımı kopyalıyor (scripts/sync-standalone.mjs).
+   *   1. `.next/static` ve `public/` klasörlerini standalone klasörüne
+   *      kopyalamayı Next üstlenmiyor. Bir kez unutuldu ve canlıda yeni
+   *      eklenen görseller 404 döndü.
+   *   2. Uygulamayı `next start` ile başlatmak standalone çıktısıyla
+   *      çalışmıyor. PM2 sunucuda tam olarak bunu yapıyordu; günlüğe
+   *      sürekli `"next start" does not work with "output: standalone"`
+   *      uyarısı düşüyordu.
+   *
+   * Kaldırınca `next start` doğru komut hâline geliyor, kopyalama adımına
+   * gerek kalmıyor ve sunucudaki PM2 tanımına dokunmak gerekmiyor.
    */
-  output: "standalone",
 
   /**
    * Görseller çalışma anında optimize EDİLMİYOR.

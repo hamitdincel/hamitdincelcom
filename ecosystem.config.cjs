@@ -1,18 +1,23 @@
 /**
  * PM2 yapılandırması — siteyi sunucuda kalıcı çalıştırır.
  *
- * Bu dosya `npm run package` çıktısıyla birlikte sunucuya taşınmalı ve
- * uygulamanın açıldığı klasörden çalıştırılmalıdır:
+ * Kurulu süreç zaten varsa buna dokunmaya gerek yok; dağıtım şu:
  *
- *   cd /var/www/hamitdincel
+ *   cd ~/www/hamitdincel.com
+ *   git checkout -- package-lock.json && git pull origin main
+ *   npm install && npm run build
+ *   pm2 reload hamitdincel
+ *
+ * Sıfırdan kurmak ya da mevcut tanımı düzeltmek gerekirse:
+ *
+ *   pm2 delete hamitdincel        # varsa
  *   pm2 start ecosystem.config.cjs
- *   pm2 save                 # mevcut süreç listesini kaydet
- *   pm2 startup              # sunucu yeniden başlayınca otomatik ayağa kalksın
+ *   pm2 save
+ *   pm2 startup                   # sunucu yeniden başlayınca kalksın (sudo ister)
  *
  * Durum ve günlükler:
  *   pm2 status
- *   pm2 logs hamitdincel
- *   pm2 reload hamitdincel   # kesintisiz yeniden başlatma
+ *   pm2 logs hamitdincel --lines 50
  */
 
 module.exports = {
@@ -20,19 +25,28 @@ module.exports = {
     {
       name: "hamitdincel",
 
-      // standalone çıktısının ürettiği minimal sunucu
-      script: "server.js",
-      cwd: "/var/www/hamitdincel",
+      /**
+       * `next start`. Standalone çıktısı kullanılmıyor (bkz. next.config.ts),
+       * bu yüzden başlatma komutu da doğrudan Next'in kendi sunucusu.
+       */
+      script: "node_modules/next/dist/bin/next",
+      args: "start",
+
+      /** Bu dosya deponun kökünde; yol sabitlemeye gerek yok. */
+      cwd: __dirname,
 
       // Site statik üretildiği için tek süreç fazlasıyla yeterli.
-      // Trafik artarsa "cluster" moduna ve instances: "max"'a geçilebilir.
       instances: 1,
       exec_mode: "fork",
 
       env: {
         NODE_ENV: "production",
-        PORT: 3000,
-        // Yalnızca yerel ağdan dinle; dışarıya nginx açıyor
+
+        /**
+         * nginx bu adrese proxy'liyor (FastPanel → Ayarlar → Backend).
+         * Değiştirilecekse iki tarafın birlikte değişmesi gerekir.
+         */
+        PORT: 3004,
         HOSTNAME: "127.0.0.1",
       },
 
@@ -44,9 +58,6 @@ module.exports = {
       max_restarts: 10,
       min_uptime: "20s",
 
-      // Günlükler
-      out_file: "/var/log/hamitdincel/out.log",
-      error_file: "/var/log/hamitdincel/error.log",
       merge_logs: true,
       time: true,
     },
