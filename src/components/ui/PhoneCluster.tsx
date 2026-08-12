@@ -16,13 +16,10 @@ export function PhoneCluster({
   screens,
   label,
   priority = false,
-  /** Mobilde yan telefonları gizleyip merkezi öne çıkar */
-  compactOnMobile = true,
 }: {
   screens: readonly ProjectScreen[];
   label: string;
   priority?: boolean;
-  compactOnMobile?: boolean;
 }) {
   const [left, center, right] = screens;
 
@@ -46,9 +43,7 @@ export function PhoneCluster({
           alt={`${label} — ${left.title}`}
           variant="small"
           priority={priority}
-          className={`animate-drift-slow z-1 -mr-[38px] translate-y-3 rotate-[-7deg] sm:-mr-[52px] sm:translate-y-4 ${
-            compactOnMobile ? "max-[420px]:hidden" : ""
-          }`}
+          className="animate-drift-slow z-1 -mr-[6.7vw] translate-y-2 rotate-[-6deg] min-[520px]:-mr-[38px] min-[520px]:translate-y-3 min-[520px]:rotate-[-7deg] sm:-mr-[52px] sm:translate-y-4"
         />
         <Phone
           src={center.src}
@@ -61,9 +56,7 @@ export function PhoneCluster({
           alt={`${label} — ${right.title}`}
           variant="small"
           priority={priority}
-          className={`animate-drift-delayed z-2 -ml-[38px] translate-y-3 rotate-[7deg] sm:-ml-[52px] sm:translate-y-4 ${
-            compactOnMobile ? "max-[420px]:hidden" : ""
-          }`}
+          className="animate-drift-delayed z-2 -ml-[6.7vw] translate-y-2 rotate-[6deg] min-[520px]:-ml-[38px] min-[520px]:translate-y-3 min-[520px]:rotate-[7deg] sm:-ml-[52px] sm:translate-y-4"
         />
       </div>
     </div>
