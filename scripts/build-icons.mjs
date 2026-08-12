@@ -10,6 +10,7 @@
  * Çıktılar çalışma anında değil, bir kez üretilip depoya yazılır:
  *   src/app/icon.png        96×96   (tarayıcı sekmesi)
  *   src/app/apple-icon.png  180×180 (iOS ana ekran)
+ *   public/favicon.ico      16/32/48 (aşağıdaki nota bak)
  *   public/brand/mark.svg   ölçeklenebilir kaynak
  */
 
@@ -99,6 +100,52 @@ await sharp(buffer)
   .png({ compressionLevel: 9 })
   .toFile("src/app/apple-icon.png");
 
+/**
+ * favicon.ico — `public/` içine, Next'in app/icon yoluna DEĞİL.
+ *
+ * Tarayıcılar `<link rel="icon">` etiketi olsa bile kök dizindeki
+ * `/favicon.ico` adresini yoklamayı sürdürüyor. Dosya yoksa bu istek
+ * Next'e gidiyor ve 45 KB'lık 404 sayfası üretiliyor — sayfa başına bir
+ * kez, üstelik HTML ile aynı anda. Sunucudaki nginx proxy'ye giden
+ * eşzamanlı istekleri çok dar sınırladığı için bu bedava istek gerçek
+ * sayfa isteğiyle yarışıyordu.
+ *
+ * `public/` altında ve `.ico` uzantılı olduğunda nginx dosyayı doğrudan
+ * diskten veriyor: Next'e hiç uğramıyor, sınıra takılmıyor.
+ *
+ * sharp .ico yazamıyor. ICO zaten ince bir kapsayıcı: 6 baytlık başlık,
+ * her boyut için 16 baytlık dizin girdisi, ardından gömülü PNG'ler.
+ * Elle kurmak dışarıdan bir bağımlılık eklemekten basit.
+ */
+const icoSizes = [16, 32, 48];
+const icoPngs = await Promise.all(
+  icoSizes.map((size) =>
+    sharp(buffer).resize(size, size).png({ compressionLevel: 9 }).toBuffer(),
+  ),
+);
+
+const header = Buffer.alloc(6);
+header.writeUInt16LE(0, 0); // ayrılmış
+header.writeUInt16LE(1, 2); // tür: 1 = ikon
+header.writeUInt16LE(icoSizes.length, 4);
+
+let offset = 6 + 16 * icoSizes.length;
+const entries = icoSizes.map((size, i) => {
+  const entry = Buffer.alloc(16);
+  entry.writeUInt8(size === 256 ? 0 : size, 0); // genişlik (256 → 0)
+  entry.writeUInt8(size === 256 ? 0 : size, 1); // yükseklik
+  entry.writeUInt8(0, 2); // palet yok
+  entry.writeUInt8(0, 3); // ayrılmış
+  entry.writeUInt16LE(1, 4); // renk düzlemi
+  entry.writeUInt16LE(32, 6); // bit derinliği
+  entry.writeUInt32LE(icoPngs[i].length, 8);
+  entry.writeUInt32LE(offset, 12);
+  offset += icoPngs[i].length;
+  return entry;
+});
+
+writeFileSync("public/favicon.ico", Buffer.concat([header, ...entries, ...icoPngs]));
+
 mkdirSync("public/brand", { recursive: true });
 writeFileSync("public/brand/mark.svg", markSvg);
 writeFileSync("public/brand/icon.svg", iconSvg);
@@ -107,6 +154,7 @@ console.log("Üretildi:");
 for (const file of [
   "src/app/icon.png",
   "src/app/apple-icon.png",
+  "public/favicon.ico",
   "public/brand/mark.svg",
   "public/brand/icon.svg",
 ]) {
