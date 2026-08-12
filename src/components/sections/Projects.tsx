@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { SmartLink } from "../ui/SmartLink";
 import { ArrowRight } from "lucide-react";
 
 import { projects } from "@/lib/projects";
@@ -70,13 +70,13 @@ function ProjectShowcase({
             <TagList items={project.tags} className="mt-8" />
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <Link
+              <SmartLink
                 href={`/referanslar/${project.slug}`}
                 className="group inline-flex min-h-11 items-center gap-2 rounded-xl bg-linear-to-b from-accent to-accent-hover px-5 py-2.5 text-[14.5px] font-medium text-white shadow-[0_1px_0_rgb(255_255_255/0.18)_inset,0_10px_26px_-14px_var(--accent-glow)] transition duration-300 hover:-translate-y-0.5"
               >
                 Projeyi incele
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+              </SmartLink>
               {project.links ? (
                 <StoreButtons
                   links={project.links}
@@ -124,13 +124,13 @@ export function Projects({ asPage = false }: { asPage?: boolean }) {
 
         {asPage ? null : (
           <Reveal className="mt-20">
-            <Link
+            <SmartLink
               href="/referanslar"
               className="group inline-flex min-h-11 items-center gap-2 rounded-xl border border-line-strong bg-surface px-6 py-3 text-[14.5px] font-medium transition duration-300 hover:-translate-y-0.5 hover:shadow-sm"
             >
               Tüm referanslara bak
               <ArrowRight className="size-4 text-ink-muted transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            </SmartLink>
           </Reveal>
         )}
       </Container>

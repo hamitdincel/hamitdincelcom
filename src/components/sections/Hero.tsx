@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SmartLink } from "../ui/SmartLink";
 import { ArrowRight, Mail } from "lucide-react";
 
 import {
@@ -93,13 +93,13 @@ export function Hero() {
 
             <Reveal index={3}>
               <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Link
+                <SmartLink
                   href="/referanslar"
                   className="group inline-flex min-h-11 items-center gap-2 rounded-xl bg-linear-to-b from-accent to-accent-hover px-6 py-3 text-[15px] font-medium text-white shadow-[0_1px_0_rgb(255_255_255/0.18)_inset,0_10px_28px_-12px_var(--accent-glow)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_1px_0_rgb(255_255_255/0.22)_inset,0_16px_36px_-14px_var(--accent-glow)]"
                 >
                   Yayındaki işlerim
                   <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
+                </SmartLink>
                 <a
                   href={mailtoHref}
                   className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-line-strong bg-surface px-6 py-3 text-[15px] font-medium transition duration-300 hover:-translate-y-0.5 hover:bg-surface-2"

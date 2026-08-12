@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SmartLink } from "../ui/SmartLink";
 import { ArrowUpRight, Mail, Phone } from "lucide-react";
 
 import {
@@ -78,13 +78,13 @@ export function Footer() {
             <ul className="mt-4 grid gap-0.5">
               {footerNavItems.map((item) => (
                 <li key={item.label}>
-                  <Link
+                  <SmartLink
                     href={item.href}
                     className="group inline-flex min-h-11 items-center gap-1.5 text-[14.2px] text-ink-muted transition-colors hover:text-ink"
                   >
                     {item.label}
                     <ArrowUpRight className="size-3 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
-                  </Link>
+                  </SmartLink>
                 </li>
               ))}
             </ul>
@@ -97,20 +97,20 @@ export function Footer() {
             </h2>
             <ul className="mt-4 grid gap-0.5">
               <li>
-                <Link
+                <SmartLink
                   href="/referanslar/medya-tilkisi"
                   className="inline-flex min-h-11 items-center text-[14.2px] text-ink-muted transition-colors hover:text-ink"
                 >
                   Medya Tilkisi
-                </Link>
+                </SmartLink>
               </li>
               <li>
-                <Link
+                <SmartLink
                   href="/referanslar/akca-koca-kultur-platformu"
                   className="inline-flex min-h-11 items-center text-[14.2px] text-ink-muted transition-colors hover:text-ink"
                 >
                   Akça Koca Kültür Platformu
-                </Link>
+                </SmartLink>
               </li>
             </ul>
 

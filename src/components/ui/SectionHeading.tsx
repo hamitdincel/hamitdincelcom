@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SmartLink } from "./SmartLink";
 import type { ReactNode } from "react";
 
 import { Reveal } from "./Reveal";
@@ -44,12 +44,12 @@ export function SectionHeading({
           aria-label="Konum"
           className="mb-6 flex min-h-11 items-center gap-2 text-[13px] text-ink-faint"
         >
-          <Link
+          <SmartLink
             href="/"
             className="inline-flex min-h-11 items-center transition-colors hover:text-ink focus-visible:text-ink"
           >
             Ana sayfa
-          </Link>
+          </SmartLink>
           <span aria-hidden className="text-line-strong">
             /
           </span>

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SmartLink } from "../ui/SmartLink";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { services } from "@/lib/content";
@@ -76,13 +76,13 @@ export function Services({ asPage = false }: { asPage?: boolean }) {
         </div>
 
         <Reveal className="mt-12">
-          <Link
+          <SmartLink
             href={asPage ? "/surec" : "/hizmetler"}
             className="group inline-flex min-h-11 items-center gap-2 rounded-xl border border-line-strong bg-surface px-6 py-3 text-[14.5px] font-medium transition duration-300 hover:-translate-y-0.5 hover:bg-surface-2 hover:shadow-sm"
           >
             {asPage ? "Nasıl çalıştığımı görün" : "Hizmetlerin tamamı"}
             <ArrowRight className="size-4 text-ink-muted transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+          </SmartLink>
         </Reveal>
       </Container>
     </Section>

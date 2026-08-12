@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SmartLink } from "../ui/SmartLink";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -70,7 +70,7 @@ export function Header() {
         className="mx-auto flex h-[70px] w-full max-w-[1200px] items-center justify-between gap-6 px-5 sm:px-8"
       >
         {/* -------------------------------------------------------- Marka */}
-        <Link
+        <SmartLink
           href="/"
           onClick={() => setMenuOpen(false)}
           className="group -my-2 inline-flex min-h-11 items-center gap-3 py-2"
@@ -96,14 +96,14 @@ export function Header() {
               MOBILE DEVELOPER
             </span>
           </span>
-        </Link>
+        </SmartLink>
 
         {/* ----------------------------------------------- Masaüstü menü */}
         <nav aria-label="Ana menü" className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => {
             const active = isActive(item.href);
             return (
-              <Link
+              <SmartLink
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
@@ -119,7 +119,7 @@ export function Header() {
                     active ? "w-5 opacity-100" : "w-0 opacity-0 group-hover:w-3 group-hover:opacity-40"
                   }`}
                 />
-              </Link>
+              </SmartLink>
             );
           })}
         </nav>
@@ -158,7 +158,7 @@ export function Header() {
           <ul className="flex flex-col">
             {navItems.map((item, index) => (
               <li key={item.href}>
-                <Link
+                <SmartLink
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
                   aria-current={isActive(item.href) ? "page" : undefined}
@@ -170,7 +170,7 @@ export function Header() {
                   <span className="font-mono text-[11px] text-ink-faint">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                </Link>
+                </SmartLink>
               </li>
             ))}
           </ul>

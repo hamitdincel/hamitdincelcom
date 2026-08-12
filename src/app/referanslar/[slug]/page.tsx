@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { SmartLink } from "@/components/ui/SmartLink";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
 
@@ -90,15 +90,15 @@ export default async function ProjectDetailPage({
             aria-label="Konum"
             className="mb-8 flex min-h-11 items-center gap-2 text-[13px] text-ink-faint"
           >
-            <Link href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
+            <SmartLink href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
               Ana sayfa
-            </Link>
+            </SmartLink>
             <span aria-hidden className="text-line-strong">
               /
             </span>
-            <Link href="/referanslar" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
+            <SmartLink href="/referanslar" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
               Referanslar
-            </Link>
+            </SmartLink>
             <span aria-hidden className="text-line-strong">
               /
             </span>
@@ -343,7 +343,7 @@ export default async function ProjectDetailPage({
         <Container>
           <div className="grid gap-4 sm:grid-cols-2">
             {previous ? (
-              <Link
+              <SmartLink
                 href={`/referanslar/${previous.slug}`}
                 className="group flex items-center gap-4 rounded-2xl border border-line bg-surface p-6 transition duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-md"
               >
@@ -356,11 +356,11 @@ export default async function ProjectDetailPage({
                     {previous.name}
                   </span>
                 </span>
-              </Link>
+              </SmartLink>
             ) : null}
 
             {next ? (
-              <Link
+              <SmartLink
                 href={`/referanslar/${next.slug}`}
                 className="group flex items-center justify-end gap-4 rounded-2xl border border-line bg-surface p-6 text-right transition duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-md sm:col-start-2"
               >
@@ -373,7 +373,7 @@ export default async function ProjectDetailPage({
                   </span>
                 </span>
                 <ArrowRight className="size-4 shrink-0 text-ink-faint transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+              </SmartLink>
             ) : null}
           </div>
 

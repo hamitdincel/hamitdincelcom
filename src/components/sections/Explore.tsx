@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SmartLink } from "../ui/SmartLink";
 import { ArrowUpRight, Clock, HelpCircle, Layers, User } from "lucide-react";
 
 import { Container, Section } from "@/components/ui/Section";
@@ -61,7 +61,7 @@ export function Explore() {
             const Icon = card.icon;
             return (
               <Reveal key={card.href} index={index} as="li" className="bg-surface">
-                <Link
+                <SmartLink
                   href={card.href}
                   className="group flex h-full flex-col p-7 transition-colors duration-300 hover:bg-surface-2 sm:p-8"
                 >
@@ -81,7 +81,7 @@ export function Explore() {
                   <span className="mt-2.5 block max-w-[42ch] text-[14.2px] leading-[1.65] text-ink-muted">
                     {card.description}
                   </span>
-                </Link>
+                </SmartLink>
               </Reveal>
             );
           })}

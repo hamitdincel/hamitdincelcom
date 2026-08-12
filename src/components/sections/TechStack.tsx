@@ -1,5 +1,5 @@
 import { techGroups } from "@/lib/content";
-import Link from "next/link";
+import { SmartLink } from "../ui/SmartLink";
 
 import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -23,9 +23,9 @@ export function TechStack({ asPage = false }: { asPage?: boolean }) {
             aria-label="Konum"
             className="mb-6 flex min-h-11 items-center gap-2 text-[13px] text-contrast-muted"
           >
-            <Link href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-contrast-ink">
+            <SmartLink href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-contrast-ink">
               Ana sayfa
-            </Link>
+            </SmartLink>
             <span aria-hidden>/</span>
             <span>Teknolojiler</span>
           </nav>

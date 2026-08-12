@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SmartLink } from "../ui/SmartLink";
 import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { closingCapabilities } from "@/lib/content";
@@ -38,9 +38,9 @@ export function Contact({ asPage = false }: { asPage?: boolean }) {
             aria-label="Konum"
             className="mb-6 flex min-h-11 items-center gap-2 text-[13px] text-ink-faint"
           >
-            <Link href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
+            <SmartLink href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-ink">
               Ana sayfa
-            </Link>
+            </SmartLink>
             <span aria-hidden className="text-line-strong">
               /
             </span>

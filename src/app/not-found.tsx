@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SmartLink } from "@/components/ui/SmartLink";
 import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
@@ -15,19 +15,19 @@ export default function NotFound() {
       </p>
 
       <div className="mt-9 flex flex-wrap justify-center gap-3">
-        <Link
+        <SmartLink
           href="/"
           className="inline-flex items-center gap-2.5 rounded-full bg-accent px-[22px] py-3 text-[15px] font-medium text-white transition hover:-translate-y-0.5 hover:bg-accent-hover"
         >
           <ArrowLeft className="size-[17px]" />
           Ana sayfaya dön
-        </Link>
-        <Link
+        </SmartLink>
+        <SmartLink
           href="/referanslar"
           className="inline-flex items-center gap-2.5 rounded-full border border-line-strong bg-surface px-[22px] py-3 text-[15px] font-medium transition hover:-translate-y-0.5 hover:bg-surface-2"
         >
           Referanslara bak
-        </Link>
+        </SmartLink>
       </div>
     </div>
   );
