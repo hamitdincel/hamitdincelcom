@@ -18,7 +18,21 @@ export const site = {
     whatsapp: "905074531414",
   },
   location: "Türkiye · Uzaktan çalışmaya uygun",
-  url: "https://hamitdincel.com",
+
+  /**
+   * Kanonik adres — `www` DAHİL, bilerek.
+   *
+   * Sunucu `hamitdincel.com` isteğini `www.hamitdincel.com`'a 301
+   * yönlendiriyor. Burada kök alan adı yazdığı sürece site Google'a
+   * "kanonik adresim şu" deyip o adresi kendinden kaçırıyordu: canonical
+   * etiketi, sitemap'teki 11 adres ve OG adresleri hep 301 dönüyordu.
+   * Google bu çelişkiyi kendince çözüp `www`'yi indeksledi.
+   *
+   * Buradaki değer canonical, sitemap, robots, OG ve JSON-LD'nin tek
+   * kaynağı. Yönlendirme yönü sunucuda değiştirilirse burası da
+   * değişmeli — ikisi ayrı düşerse aynı çelişki geri gelir.
+   */
+  url: "https://www.hamitdincel.com",
   description:
     "Hamit Dincel — iOS ve Android native mobil uygulama geliştiricisi. Fikirden App Store ve Google Play'de yayına kadar tek elden: mobil uygulama, REST API, backend ve web.",
 } as const;
