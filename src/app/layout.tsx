@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-import { analyticsId, siteVerification } from "@/lib/analytics";
+import { adsenseClient, analyticsId, siteVerification } from "@/lib/analytics";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
@@ -82,6 +82,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
+        {/**
+         * AdSense site doğrulama betiği.
+         *
+         * `next/script` yerine düz `<script async src>`: React 19 bu biçimi
+         * kendiliğinden `<head>` içine taşıyor ve tekrarını engelliyor —
+         * Google'ın istediği yer tam olarak orası. `next/script` ise
+         * `beforeInteractive` ile bile betiği gövdeye yazıyor.
+         *
+         * Yalnızca üretimde basılır (bkz. lib/analytics.ts).
+         */}
+        {adsenseClient ? (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+          />
+        ) : null}
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={jsonLdScript(personJsonLd)}
